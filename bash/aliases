@@ -1,15 +1,79 @@
-. ~/.zsh/aliases
-
-# changing directory to code project
-function c { cd ~/code/$1; }
-
-# alternative to "rails" command to use templates
-function railsapp {
-  template=$1
-  appname=$2
-  shift 2
-  rails $appname -m http://github.com/ryanb/rails-templates/raw/master/$template.rb $@
+####################################################
+# Bash navigate
+####################################################
+alias se='ssh m6ni@linux.student.cs.uwaterloo.ca'
+sync(){
+  scp -r m6ni@linux.student.cs.uwaterloo.ca:/u8/m6ni/$1 /home/mingjia/Desktop
 }
+alias uw='cd ~/Documents/uwaterloo/'
+export EDITOR='atom'
+alias atom='atom --disable-gpu .'
 
-# misc
-alias reload='. ~/.bash_profile'
+####################################################
+####################################################
+####################################################
+####################################################
+
+####################################################
+# bash
+####################################################
+alias bash='source ~/.bashrc &&echo "Reload .bash_profile"'
+alias bashrc='cd && atom . && cd -'
+alias update='sudo apt-get update && sudo apt-get upgrade'
+
+####################################################
+# ruby on rails
+####################################################
+alias rs='cd . && bundle exec rails s'
+alias rc='cd . && bundle exec rails c'
+alias rcc='cd . && bundle exec rails r Rails.cache.clear'
+alias ber='bundle exec rake'
+
+####################################################
+# github
+####################################################
+alias gs='git status -sb'
+alias gca='git add -A && git commit -m'
+alias gc='git checkout'
+alias gd='git diff'
+alias gb='git branch -v'
+alias gp='git push'
+alias gf='git fetch origin && git pull'
+alias gm='git checkout master && gf'
+alias greset='git checkout -- . && git clean -df'
+alias gl='git log --graph --pretty=format:"%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset" --abbrev-commit'
+
+####################################################
+# Browse file
+####################################################
+
+# enable color support of ls and also add handy aliases
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    alias ls='ls --color=auto'
+    #alias dir='dir --color=auto'
+    #alias vdir='vdir --color=auto'
+
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
+fi
+
+# colored GCC warnings and errors
+#export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+
+# some more ls aliases
+alias la='ls -A'
+alias l='ls -CF'
+alias ll='ls -AlhG'
+alias egrep='egrep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias grep='grep --color=auto'
+alias ..='cd ..'
+alias ...='cd ../../../'
+
+####################################################
+# System monitor
+####################################################
+alias tu='top -o %CPU' #cpu
+alias tm='top -o %MEM' #memory

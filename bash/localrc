@@ -1,0 +1,13 @@
+#This file will be loaded as a local bash_file
+#The custom bash file for different systems could be put here
+
+####################################################
+# Start up
+####################################################
+
+#Ubuntu:
+    #neofetch
+
+#macOS
+    #lshw | head -19 | tail -10
+    #figlet Welcome To My Work Station
