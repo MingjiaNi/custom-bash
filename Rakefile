@@ -1,12 +1,14 @@
 require 'rake'
 require 'erb'
 
+backup_path = "~/Developemt/.bash_backup"
+
 desc "install the dot files into user's home directory"
 task :install do
   replace_all = false
   Dir['*'].each do |file|
     next if %w[Rakefile README.rdoc LICENSE].include? file
-    
+
     if File.exist?(File.join(ENV['HOME'], ".#{file.sub('.erb', '')}"))
       if File.identical? file, File.join(ENV['HOME'], ".#{file.sub('.erb', '')}")
         puts "identical ~/.#{file.sub('.erb', '')}"
@@ -32,9 +34,30 @@ task :install do
   end
 end
 
+task :restore_backup do
+    Dir["#{backup_path}/*"].each do |file|
+        if File.exist?(File.join(ENV['HOME'], ".#{file.sub('.erb', '')}"))
+            if !(File.identical? file, File.join(ENV['HOME'], ".#{file.sub('.erb', '')}"))
+                restore_file(file)
+            end
+        end
+    end
+end
+
 def replace_file(file)
-  system %Q{rm -rf "$HOME/.#{file.sub('.erb', '')}"}
+  backup_file(file)
   link_file(file)
+end
+
+def backup_file(file)
+    system %Q{rm -rf "#{backup_path}"}
+    system %Q{mkdir "#{backup_path}"}
+    system %Q{mv "$HOME/.#{file.sub('.erb', '')}" "#{backup_path}/.#{file.sub('.erb', '')}"}
+    print "File #{file.sub('.erb', '')} has been stored to #{backup_path}"
+end
+
+def restore_file(file)
+    system %Q{mv "#{backup_path}/#{file}" "$HOME/.#{file}"}
 end
 
 def link_file(file)
