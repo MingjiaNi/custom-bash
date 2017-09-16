@@ -1,8 +1,7 @@
-== Installation
+custom-bash== Installation
 
-  git clone git@github.com:MingjiaNi/dotfiles.git ~/.dotfiles
-  cd ~/.dotfiles
-  git checkout custom-bash
+  git clone git@github.com:MingjiaNi/custom-bash.git ~/.custom-bash
+  cd ~/.custom-bash
   rake install
 
 
