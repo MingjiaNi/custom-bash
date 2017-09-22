@@ -30,6 +30,7 @@ task :install do
       link_file(file)
     end
   end
+  puts 'run PROMPT_COMMAND=\'__git_ps1 "\u:\W" "\\\\\\$ "\' so that git prompt can work'
 end
 
 task :restore_backup do
