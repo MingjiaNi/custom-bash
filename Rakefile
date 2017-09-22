@@ -1,8 +1,6 @@
 require 'rake'
 require 'erb'
 
-backup_path = "~/Developemt/.bash_backup"
-
 desc "install the dot files into user's home directory"
 task :install do
   replace_all = false
@@ -42,6 +40,10 @@ task :restore_backup do
             end
         end
     end
+end
+
+def backup_path
+  "$HOME/Documents/.bash_backup"
 end
 
 def replace_file(file)
