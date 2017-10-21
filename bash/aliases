@@ -7,7 +7,10 @@ sync(){
 }
 alias uw='cd ~/Documents/uwaterloo/'
 export EDITOR='atom'
-alias atom='atom --disable-gpu .'
+alias dev='cd ~/Documents/Development'
+whereis(){
+  find . -name "$1" -print
+}
 
 ####################################################
 ####################################################
